@@ -1,4 +1,5 @@
 # TODO
+# - use system libgadu (then remove libjpeg BR)
 # - WARNING: No GPG support in Jabber, since GPGME library not found or its setup not ok
 Summary:	Console ncurses based IM (ICQ, Yahoo!, MSN, AIM, IRC) client
 Summary(es.UTF-8):	CenterIM es un cliente ICQ basado en ncurses para el modo texto
@@ -7,22 +8,22 @@ Summary(pt_BR.UTF-8):	O centerIM é um cliente ICQ baseado em ncurses para o mod
 Name:		centerim
 Version:	4.22.2
 Release:	2
-License:	GPL
+License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://www.centerim.org/download/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	dcced736e2f261e08e667403c42dc78f
 URL:		http://www.centerim.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	curl-devel
+BuildRequires:	curl-devel >= 4.12.0
+BuildRequires:	fribidi-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnutls-devel >= 1.2.5
-BuildRequires:	libsigc++1-devel >= 1.0.0
+# tested, but HAVE_GPGME never defined because of test->text typo
+#BuildRequires:	gpgme-devel >= 0.4.2
+BuildRequires:	libjpeg-devel
+# not enabled
+#BuildRequires:	libotr-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
 BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	sed >= 4.0
 Obsoletes:	centerICQ
 Obsoletes:	centericq < 4.22.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,6 +63,7 @@ O CenterIM é um cliente ICQ baseado em ncurses para o modo texto.
 %build
 CXXFLAGS="-I/usr/include/ncurses %{rpmcflags}"
 %configure \
+	ac_cv_lib_nsl_gethostbyname=no \
 	--with-openssl
 %{__make}
 
@@ -71,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/zh_TW.Big5
+mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{zh_TW.Big5,zh_TW}
 
 %find_lang %{name}
 
@@ -80,8 +82,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS README ChangeLog FAQ TODO THANKS NEWS INSTALL
-%attr(755,root,root) %{_bindir}/*
+%doc AUTHORS ChangeLog FAQ NEWS README THANKS TODO
+%attr(755,root,root) %{_bindir}/centerim
+%attr(755,root,root) %{_bindir}/cimconv
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*.wav
-%{_mandir}/man?/*
+%{_mandir}/man1/centerim.1*
+%{_mandir}/man1/cimconv.1*
