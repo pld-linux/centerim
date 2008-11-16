@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Klient IM (ICQ, Yahoo!, MSN, AIM, IRC) w wersji tekstowej
 Summary(pt_BR.UTF-8):	O centerIM é um cliente ICQ baseado em ncurses para o modo texto
 Name:		centerim
 Version:	4.22.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://www.centerim.org/download/releases/%{name}-%{version}.tar.gz
@@ -70,6 +70,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -r $RPM_BUILD_ROOT%{_datadir}/locale/zh_TW.Big5
 
 %find_lang %{name}
 
