@@ -6,12 +6,12 @@ Summary(es.UTF-8):	CenterIM es un cliente ICQ basado en ncurses para el modo tex
 Summary(pl.UTF-8):	Klient IM (ICQ, Yahoo!, MSN, AIM, IRC) w wersji tekstowej
 Summary(pt_BR.UTF-8):	O centerIM é um cliente ICQ baseado em ncurses para o modo texto
 Name:		centerim
-Version:	4.22.2
-Release:	3
+Version:	4.22.7
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
-Source0:	http://www.centerim.org/download/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	dcced736e2f261e08e667403c42dc78f
+Source0:	http://www.centerim.org/download/releases/%{name}-%{version}.tar.bz2
+# Source0-md5:	2db303baa9b7680c2cccb3314bfa7ae2
 URL:		http://www.centerim.org/
 BuildRequires:	curl-devel >= 4.12.0
 BuildRequires:	fribidi-devel
@@ -64,7 +64,7 @@ O CenterIM é um cliente ICQ baseado em ncurses para o modo texto.
 CXXFLAGS="-I/usr/include/ncurses %{rpmcflags}"
 %configure \
 	ac_cv_lib_nsl_gethostbyname=no \
-	--with-openssl
+	--with-openssl 
 %{__make}
 
 %install
@@ -72,8 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{zh_TW.Big5,zh_TW}
 
 %find_lang %{name}
 
