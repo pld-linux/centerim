@@ -1,0 +1,13 @@
+lazy fix for -ltinfow (ideally should fix the other cases as well)
+
+--- centerim-4.22.9/configure.ac~	2009-12-14 22:25:50.000000000 +0200
++++ centerim-4.22.9/configure.ac	2010-10-17 13:33:58.455760800 +0300
+@@ -386,7 +386,7 @@
+ AC_CHECK_LIB(nsl, gethostbyname)
+ 
+ AC_CHECK_LIB(ncursesw, get_wch, [AC_DEFINE(HAVE_NCURSESW, 1, [check widechar ncurses])
+-LIBS="$LIBS -lncursesw"
++LIBS="$LIBS -lncursesw -ltinfow"
+ 		 AC_CHECK_HEADERS(ncursesw/cursesw.h,[])
+ 		 AC_CHECK_HEADERS(ncursesw/curses.h, [])
+ ], [
