@@ -14,6 +14,8 @@ Source0:	http://www.centerim.org/download/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	c43911508205e0277529230c8316a298
 Patch0:		ncurses-tinfo.patch
 URL:		http://www.centerim.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	curl-devel >= 4.12.0
 BuildRequires:	fribidi-devel
 BuildRequires:	gettext-devel
@@ -25,6 +27,8 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	pkgconfig
+BuildRequires:	rpm-pythonprov
 Obsoletes:	centerICQ
 Obsoletes:	centericq < 4.22.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
