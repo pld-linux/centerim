@@ -18,7 +18,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	curl-devel >= 4.12.0
 BuildRequires:	fribidi-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 # tested, but HAVE_GPGME never defined because of test->text typo
 #BuildRequires:	gpgme-devel >= 0.4.2
 BuildRequires:	libjpeg-devel
